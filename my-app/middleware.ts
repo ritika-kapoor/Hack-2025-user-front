@@ -3,8 +3,11 @@ import { getToken } from "next-auth/jwt"
 
 const secret = "your_dummy_secret"
 
+// export async function middleware(req: NextRequest) {
 export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret })
+
+//   console.log(token);
 
   if (!token) {
     console.log("🔒 No token, redirecting to login")
@@ -16,5 +19,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/user"],
+  matcher: ["/user/"],
 }
