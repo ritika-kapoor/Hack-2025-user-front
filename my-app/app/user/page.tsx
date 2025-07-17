@@ -2,11 +2,15 @@ import { Suspense } from "react"
 import FoodCardGrid from "@/components/food-card-grid"
 import SearchFilters from "@/components/search-filters"
 import { Loader2 } from "lucide-react"
+import LogoutButton from "@/components/logout-button" // 👈 add
 
 export default function UserHomePage() {
   return (
     <main className="container mx-auto px-4 pb-24 pt-4">
-      <h1 className="text-2xl font-bold mb-4">Available Food</h1>
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-2xl font-bold">Available Food</h1>
+        <LogoutButton />
+      </div>
 
       <SearchFilters />
 

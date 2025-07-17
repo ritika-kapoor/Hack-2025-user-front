@@ -1,23 +1,30 @@
 import { NextRequest, NextResponse } from "next/server"
-import { getToken } from "next-auth/jwt"
+import jwt from "jsonwebtoken"
 
-const secret = "your_dummy_secret"
+const JWT_SECRET = "your_dummy_secret" // TODO: process.env.NEXT_PUBLIC_...? (actually server env)
+const JWT_COOKIE_NAME = "token"
 
-// export async function middleware(req: NextRequest) {
-export async function middleware(req: NextRequest) {
-  const token = await getToken({ req, secret })
+export function middleware(req: NextRequest) {
+  console.log("🔍 Middleware triggered")
 
-//   console.log(token);
-
+  const token = req.cookies.get(JWT_COOKIE_NAME)?.value
   if (!token) {
-    console.log("🔒 No token, redirecting to login")
+    console.log("🔒 No token cookie, redirecting to login")
     return NextResponse.redirect(new URL("/auth/login", req.url))
   }
 
-  console.log("✅ Token found:", token)
-  return NextResponse.next()
+  try {
+    // Verify signature & expiry
+    jwt.verify(token, JWT_SECRET)
+    console.log("✅ Token valid")
+    return NextResponse.next()
+  } catch (err) {
+    console.error("❌ Invalid/expired token:", err)
+    return NextResponse.redirect(new URL("/auth/login", req.url))
+  }
 }
 
+// Apply to /user and any nested routes under it
 export const config = {
   matcher: ["/user/"],
 }
