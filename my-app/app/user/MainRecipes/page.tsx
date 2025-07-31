@@ -1,6 +1,5 @@
 'use client'
 import RecipesLists from "@/components/Recipes/RecipeLists"
-import TabBar from "@/components/Recipes/ServingSize/TabBar";
 import UserHeader from "@/components/Recipes/user-header"
 import useRecipesApi from "@/features/recipes/UseRecipesApi"
 
@@ -10,7 +9,6 @@ export default function MainRecipes() {
         <div className="flex justify-center">
             <div className="flex flex-col items-center">
                 <UserHeader />
-                <TabBar />
                 <RecipesLists recipes={recipes}/>
             </div>
         </div>

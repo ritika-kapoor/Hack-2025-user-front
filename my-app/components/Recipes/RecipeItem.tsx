@@ -1,6 +1,7 @@
 import { Recipe } from "@/types/Recipe";
 import Image from "next/image";
 import Link from "next/link";
+import { Bookmark } from "lucide-react";
 
 export default function RecipeItem({ recipe }: { recipe: Recipe }) {
   console.log(recipe);
@@ -18,6 +19,13 @@ export default function RecipeItem({ recipe }: { recipe: Recipe }) {
                   className="object-cover rounded-xl"
                 />
               )}
+              <div className="w-10 h-10 absolute bottom-1 right-1">
+                <div className="w-10 h-10 left-0 top-0 absolute opacity-40 bg-zinc-800 rounded-full"></div>
+                <Bookmark
+                  className={`absolute left-[calc(50%-14px)] top-[calc(50%-14px)] ${recipe.store_recipe ? "fill-yellow-500 text-yellow-500" : "text-white"}`}
+                  size={30}
+                />
+              </div>
             </div>
             <div className="w-56 inline-flex flex-col justify-start items-start gap-4">
               <div className="self-stretch flex flex-col justify-start items-start gap-1">

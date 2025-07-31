@@ -7,37 +7,13 @@ const dummyRecipes = [
         description:"家族に人気の夏に食べたいカレーです",
         image: "/images/curry.jpg",
         ingredients:[
-            {
-                id:1,
-                name:"バーモンドカレー",
-                amount:200,
-            },
-            {
-                id:2,
-                name:"にんじん",
-                amount:100,
-            },
-            {
-                id:3,
-                name:"玉ねぎ",
-                amount:100
-            },
-            {
-                id:4,
-                name:"牛肉",
-                amount:300,
-            },
-            {
-                id:5,
-                name:"水",
-                amount:500,
-
-            },
-            { 
-                id:6,
-                name:"ジャガイモ",
-                amount:150,
-            }
+            {id:1,name:"バーモンドカレー",amount:200},
+            {id:2,name:"にんじん",amount:100},
+            {id:3,name:"玉ねぎ",amount:100},
+            {id:4,name:"牛肉",amount:300},
+            {id:5,name:"水",amount:500},
+            {id:6,name:"ジャガイモ",amount:150},
+            {id:7,name:"りんご", amount:100}
         ],
         steps:[
             { id:1, description:"牛肉と野菜を一口大に切る。"},
@@ -46,6 +22,7 @@ const dummyRecipes = [
             { id:4, description:"一度火を止め、カレールーを溶かし入れる。"},
             { id:5, description:"再び弱火で煮込む。"}
         ],
+        store_recipe:true,
         cookingTime:"40分",
         calories:"600 kcal",
         cookingPoint:"隠し味にチョコレートやコーヒーを加えるとコクが出ます。"
@@ -68,6 +45,7 @@ const dummyRecipes = [
             { id:3, description:"みじん切りにした野菜を加えて炒め、トマト缶と調味料を加えて煮込む。"},
             { id:4, description:"パスタを茹で、ミートソースをかける。"}
         ],
+        store_recipe:true,
         cookingTime:"30分",
         calories:"500 kcal",
         cookingPoint:"隠し味に赤ワインを加えると風味がアップします。"
@@ -89,6 +67,7 @@ const dummyRecipes = [
             { id:2, description:"フライパンに油を熱し、豚肉を焼く。"},
             { id:3, description:"残りのタレを加えて煮詰める。"}
         ],
+        store_recipe:false,
         cookingTime:"15分",
         calories:"450 kcal",
         cookingPoint:"漬け込み時間を長くすると、より味が染み込みます。"
@@ -106,6 +85,7 @@ const dummyRecipes = [
             { id:1, description:"鮭に塩を振って10分ほど置き、水気を拭き取る。"},
             { id:2, description:"魚焼きグリルまたはフライパンで焼く。"}
         ],
+        store_recipe:false,
         cookingTime:"10分",
         calories:"200 kcal",
         cookingPoint:"焦げ付かないように、皮から焼くと良いでしょう。"
@@ -133,6 +113,7 @@ const dummyRecipes = [
                 description:"170℃に熱した油で揚げる。"
             }
         ],
+        store_recipe:false,
         cookingTime:"20分",
         calories:"350 kcal",
         cookingPoint:"二度揚げするとよりカリッと仕上がります。"
