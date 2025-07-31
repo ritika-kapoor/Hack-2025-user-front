@@ -2,7 +2,6 @@
 
 import { ArrowLeft, ArrowUpDown } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
 import {
   Select,
   SelectContent,
@@ -12,7 +11,6 @@ import {
 } from '@/components/ui/select';
 
 export default function UserHeader() {
-  const [sortOption, setSortOption] = useState('おすすめ');
   return (
     <>
       <div className="self-stretch px-4 py-2 bg-stone-100 inline-flex justify-between items-center">
@@ -25,9 +23,9 @@ export default function UserHeader() {
               </div>
               {/* レシピ一覧をabsoluteで中央に配置 */}
               <div className="absolute left-1/2 -translate-x-1/2 text-center text-neutral-900 text-sm font-bold font-['Noto_Sans_JP'] leading-snug">レシピ一覧</div>
-              <Select onValueChange={setSortOption} defaultValue={sortOption}>
+              <Select>
                 <SelectTrigger className="h-6 p-2 bg-white rounded flex justify-end items-center gap-1 w-fit">
-                  <ArrowUpDown className="w-2.5 h-2 text-neutral-900" />
+                  <ArrowUpDown className="w-2.5 h-2 text-neutral-900"/>
                   <SelectValue placeholder="並び替え" />
                 </SelectTrigger>
                 <SelectContent>
