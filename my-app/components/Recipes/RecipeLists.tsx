@@ -1,6 +1,5 @@
 // このページはレシピの一覧を表示するページです。
 // 親からpropsでレシピのデータを受け取って、それをRecipesItemsコンポーネントに渡します。
-"use client"
 import { Recipe } from "@/types/Recipe";
 import RecipeItem from "./RecipeItem";
 
