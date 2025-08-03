@@ -1,10 +1,9 @@
-'use client'
 import RecipesLists from "@/components/Recipes/RecipeLists"
 import UserHeader from "@/components/Recipes/user-header"
-import useRecipesApi from "@/features/recipes/UseRecipesApi"
+import { getRecipes } from "@/features/recipes/GetRecipeApi";
 
-export default function MainRecipes() {
-    const { recipes} = useRecipesApi();
+export default async function MainRecipes() {
+    const recipes = await getRecipes();
     return (
         <div className="flex justify-center">
             <div className="flex flex-col items-center">
