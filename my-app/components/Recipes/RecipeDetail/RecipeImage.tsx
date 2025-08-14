@@ -10,7 +10,7 @@ export default function RecipeImage({ image }: RecipeImageProps) {
   return (
     <div>
       <div className="mb-3 mt-6">
-      <Link href="/user/MainRecipes/">
+      <Link href="/user/recipes/">
         <ArrowLeft className="w-6 h-6 text-zinc-900" />
       </Link>
       </div>

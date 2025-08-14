@@ -4,10 +4,9 @@ import Link from "next/link";
 import { Bookmark } from "lucide-react";
 
 export default function RecipeItem({ recipe }: { recipe: Recipe }) {
-  console.log(recipe);
   return (
     <>
-      <Link href={`/user/MainRecipes/${recipe.id}`}>
+      <Link href={`/user/recipes/${recipe.id}`}>
         <div className="self-stretch px-4 py-6 flex flex-col justify-start items-start">
           <div className="self-stretch rounded-xl inline-flex items-start gap-x-6">
             <div className="w-[120px] h-[120px] relative rounded-xl overflow-hidden">
