@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import AuthGuard from "@/components/AuthGuard"
 import { Clock, MapPin, Store, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
@@ -30,7 +31,8 @@ export default function FoodDetailPage({ params }: { params: { id: string } }) {
   const discountPercentage = Math.round(((item.originalPrice - item.discountedPrice) / item.originalPrice) * 100)
 
   return (
-    <div className="pb-20">
+    <AuthGuard>
+      <div className="pb-20">
       <div className="relative h-64 sm:h-80">
         <Link href="/user" className="absolute top-4 left-4 z-10">
           <Button variant="outline" size="icon" className="bg-background/80 backdrop-blur-sm">
@@ -106,6 +108,7 @@ export default function FoodDetailPage({ params }: { params: { id: string } }) {
 
         <Button className="w-full">Reserve for Pickup</Button>
       </div>
-    </div>
+      </div>
+    </AuthGuard>
   )
 }

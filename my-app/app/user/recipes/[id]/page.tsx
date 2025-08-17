@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import AuthGuard from "@/components/AuthGuard"
 import { Bookmark, Clock, ChefHat, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
@@ -41,7 +42,8 @@ export default function RecipeDetailPage({ params }: { params: { id: string } })
   const recipe = getRecipe(params.id)
 
   return (
-    <div className="pb-20">
+    <AuthGuard>
+      <div className="pb-20">
       <div className="relative h-64 sm:h-80">
         <Link href="/user/recipes" className="absolute top-4 left-4 z-10">
           <Button variant="outline" size="icon" className="bg-background/80 backdrop-blur-sm">
@@ -114,6 +116,7 @@ export default function RecipeDetailPage({ params }: { params: { id: string } })
           </div>
         </section>
       </div>
-    </div>
+      </div>
+    </AuthGuard>
   )
 }

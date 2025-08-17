@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import AuthGuard from "@/components/AuthGuard"
 import { Camera, Upload } from "lucide-react"
 import { useRouter } from "next/navigation"
 
@@ -39,8 +40,9 @@ export default function CreateRecipePage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-6">
-      <h1 className="text-2xl font-bold mb-6">Create New Recipe</h1>
+    <AuthGuard>
+      <div className="container mx-auto px-4 py-6">
+        <h1 className="text-2xl font-bold mb-6">Create New Recipe</h1>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
@@ -132,6 +134,7 @@ export default function CreateRecipePage() {
           </Button>
         </div>
       </form>
-    </div>
+      </div>
+    </AuthGuard>
   )
 }

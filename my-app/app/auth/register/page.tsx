@@ -28,7 +28,7 @@ export default function RegisterPage() {
     setStep(2)
   }
 
-  const handleStep2Submit = () => {
+  const handleStep2Submit = async () => {
     if (!password || !passwordConfirm) {
       setError("パスワードを入力してください")
       return
@@ -41,8 +41,39 @@ export default function RegisterPage() {
       setError("パスワードは6文字以上で入力してください")
       return
     }
-    setError("")
-    setStep(3)
+    
+    try {
+      setError("")
+      
+      // emailからnameを生成（@より前の部分）
+      const name = email.split("@")[0]
+      
+      // 既存のuser登録APIに送信
+      const response = await fetch("http://localhost:8080/api/v1/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          name: name,
+        }),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || "登録に失敗しました")
+      }
+
+      const data = await response.json()
+      console.log("ユーザー登録成功:", data)
+      
+      setStep(3)
+    } catch (error) {
+      console.error("登録エラー:", error)
+      setError(error instanceof Error ? error.message : "登録に失敗しました")
+    }
   }
 
   const handleCompleteRegistration = () => {
