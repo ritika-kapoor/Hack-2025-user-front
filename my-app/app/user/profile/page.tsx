@@ -6,7 +6,7 @@ import { useAuth } from "@/hooks/useAuth"
 import { User, LogOut, Settings, Shield, Mail } from "lucide-react"
 
 export default function ProfilePage() {
-  const { user, loading, logout } = useAuth()
+  const { user, logout } = useAuth()
 
   return (
     <AuthGuard>

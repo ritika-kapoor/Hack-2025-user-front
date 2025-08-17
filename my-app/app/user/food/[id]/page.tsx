@@ -26,8 +26,9 @@ const getFoodItem = (id: string) => {
   }
 }
 
-export default function FoodDetailPage({ params }: { params: { id: string } }) {
-  const item = getFoodItem(params.id)
+export default async function FoodDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const item = getFoodItem(id)
   const discountPercentage = Math.round(((item.originalPrice - item.discountedPrice) / item.originalPrice) * 100)
 
   return (

@@ -1,7 +1,7 @@
 "use client"
 
 import AuthGuard from "@/components/AuthGuard"
-import { Bookmark, Heart } from "lucide-react"
+import { Heart } from "lucide-react"
 
 export default function FavoritesPage() {
   return (

@@ -38,8 +38,9 @@ const getRecipe = (id: string) => {
   }
 }
 
-export default function RecipeDetailPage({ params }: { params: { id: string } }) {
-  const recipe = getRecipe(params.id)
+export default async function RecipeDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const recipe = getRecipe(id)
 
   return (
     <AuthGuard>
