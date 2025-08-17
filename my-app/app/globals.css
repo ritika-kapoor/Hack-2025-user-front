@@ -120,3 +120,57 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Mobile-specific styles */
+@layer utilities {
+  /* Prevent zoom on input focus for mobile */
+  input, textarea, select {
+    font-size: 16px;
+  }
+  
+  /* Touch-friendly button sizes */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Mobile camera optimizations */
+  .camera-container {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Prevent pull-to-refresh on mobile */
+  body {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Mobile-specific animations */
+  @media (max-width: 768px) {
+    .animate-pulse {
+      animation-duration: 2s;
+    }
+    
+    .hover\:shadow-lg:hover {
+      box-shadow: none;
+    }
+    
+    .cursor-pointer {
+      cursor: default;
+    }
+  }
+  
+  /* Landscape orientation adjustments for mobile */
+  @media (max-width: 768px) and (orientation: landscape) {
+    .min-h-screen {
+      min-height: auto;
+    }
+    
+    .h-80 {
+      height: 60vh;
+    }
+  }
+}
