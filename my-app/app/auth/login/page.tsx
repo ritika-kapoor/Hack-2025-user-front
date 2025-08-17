@@ -30,20 +30,76 @@ const handleLogin = async () => {
 }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
-        <div className="space-y-4 text-center">
-          <h1 className="text-3xl font-bold">Login</h1>
-          <p className="text-gray-500 dark:text-gray-400">Enter your credentials to access your account.</p>
+    <div className="min-h-screen px-4 py-8">
+      <div className="max-w-sm mx-auto">
+        {/* meguruロゴ */}
+        <div className="text-center mb-12 mt-8">
+          <img 
+            src="/images/meguru_logo.png" 
+            alt="meguru" 
+            className="h-12 mx-auto"
+          />
         </div>
-        <div className="mt-6 space-y-4">
-          <Input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-          <Input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-          {error && <p className="text-red-500 text-sm">{error}</p>}
-          <Button onClick={handleLogin} className="w-full">Login</Button>
-          <div className="text-center text-sm">
-            Don’t have an account? <Link className="text-blue-500" href="/auth/register">Register</Link>
+
+        {/* ログインタイトル */}
+        <div className="text-center mb-8">
+          <h1 className="text-2xl text-gray-900">ログイン</h1>
+        </div>
+
+        {/* ログインフォーム */}
+        <div className="space-y-6">
+          <div>
+            <label className="block text-sm text-gray-700 mb-2">
+              メールアドレス
+            </label>
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+            />
           </div>
+
+          <div>
+            <label className="block text-sm text-gray-700 mb-2">
+              パスワード
+            </label>
+            <Input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+            />
+          </div>
+
+          <div className="text-left">
+            <Link href="#" className="text-sm text-gray-500 hover:text-gray-700">
+              パスワードを忘れた方
+            </Link>
+          </div>
+
+          {error && (
+            <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+              <p className="text-red-600 text-sm">{error}</p>
+            </div>
+          )}
+
+          <Button
+            onClick={handleLogin}
+            className="w-full h-12 text-white font-medium rounded-lg hover:opacity-90 transition-all"
+            style={{ backgroundColor: '#F1B300' }}
+          >
+            ログインする
+          </Button>
+
+          <Button
+            variant="outline"
+            asChild
+            className="w-full h-12 font-medium rounded-lg border-2 hover:bg-gray-50 transition-all"
+            style={{ borderColor: '#F1B300', color: '#F1B300' }}
+          >
+            <Link href="/auth/register">新規登録</Link>
+          </Button>
         </div>
       </div>
     </div>
