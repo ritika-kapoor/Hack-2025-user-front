@@ -101,7 +101,7 @@ const handleLogin = async () => {
           </div>
 
           <div className="text-left">
-            <Link href="#" className="text-sm text-gray-500 hover:text-gray-700">
+            <Link href="/auth/forgot-password" className="text-sm text-gray-500 hover:text-gray-700">
               パスワードを忘れた方
             </Link>
           </div>
