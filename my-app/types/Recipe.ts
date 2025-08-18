@@ -9,4 +9,5 @@ export interface Recipe {
     cookingTime: string;
     calories: string;
     cookingPoint: string;
+    store_date: string;
 }
