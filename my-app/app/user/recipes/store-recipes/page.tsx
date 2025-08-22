@@ -3,7 +3,7 @@ import { Suspense } from "react";
 
 export default function Page() {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen">
+        <div className="flex flex-col items-center min-h-screen">
             <Suspense
                 fallback={
                     <div className="flex flex-col justify-center items-center h-screen w-screen absolute top-0 left-0">
