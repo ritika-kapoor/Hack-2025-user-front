@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import AuthGuard from "@/components/AuthGuard"
 import { useAuth } from "@/hooks/useAuth"
-import { User, LogOut, Settings, Shield, Mail, MapPin, Loader2, CheckCircle, AlertCircle, Search } from "lucide-react"
+import { User, LogOut, MapPin, Loader2, CheckCircle, AlertCircle, Search } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
