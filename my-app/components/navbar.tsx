@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, BookOpen, Heart, User, Bookmark } from "lucide-react"
+import { Home, BookOpen, User, Bookmark } from "lucide-react"
 
 export default function Navbar() {
   const pathname = usePathname()
