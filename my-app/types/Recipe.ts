@@ -3,8 +3,8 @@ export interface Recipe {
     title: string;
     description: string;
     image: string;
-    ingredients: { id: number; name: string; amount: number | string }[];
-    steps: { id: number; description: string }[];
+    ingredients: { name: string; amount: string }[];
+    steps: { description: string }[];
     store_recipe?: boolean;
     cookingTime: string;
     calories: string;

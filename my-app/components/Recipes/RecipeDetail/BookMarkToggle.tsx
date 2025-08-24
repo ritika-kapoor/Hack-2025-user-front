@@ -1,15 +1,66 @@
 import { Bookmark } from "lucide-react";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface BookMarkToggleProps {
-    store_recipe: boolean;
+    // store_recipe: boolean;
+    recipe_id: string;
 }
 
-export default function BookMarkToggle({ store_recipe }: BookMarkToggleProps) {
-    const [isBookMarked, setIsBookMarked] = useState(store_recipe);
+export default function BookMarkToggle({ recipe_id }: BookMarkToggleProps) {
+    const [isBookMarked, setIsBookMarked] = useState(false);
+
+    useEffect(() => {
+        const fetchBookmarkStatus = async () => {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                return;
+            }
+            // Assume an API endpoint exists to check if a recipe is bookmarked
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/bookmarked-recipes?recipe_id=${recipe_id}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setIsBookMarked(data.isBookMarked); // Assuming the API returns { isBookMarked: boolean }
+            }
+        };
+        fetchBookmarkStatus();
+    }, [recipe_id]);
+
+    const handleBookmarkToggle = useCallback(async() => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            // Handle cases where token is not available (e.g., user not logged in)
+            return;
+        }
+
+        const method = isBookMarked ? "DELETE" : "POST";
+        const endpoint = isBookMarked ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/bookmarked-recipes?recipe_id=${recipe_id}` : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/bookmarked-recipes`;
+
+        const response = await fetch(endpoint, {
+            method: method,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+            body: method === "POST" ? JSON.stringify({ recipe_id: recipe_id }) : undefined,
+        });
+
+        if (response.ok) {
+            setIsBookMarked(!isBookMarked);
+        } else {
+            console.error("Failed to toggle bookmark status");
+        }
+    }, [isBookMarked, recipe_id]);
+    
     return (
         <div>
-            <button onClick={() => setIsBookMarked(!isBookMarked)}>
+            <button onClick={handleBookmarkToggle}>
                 <Bookmark className={`w-10 h-10 ${isBookMarked ? "fill-yellow-500 text-yellow-500" : "stroke-black fill-transparent"}`} />
             </button>
         </div>
