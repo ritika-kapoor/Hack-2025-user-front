@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import AuthGuard from '@/components/AuthGuard'
+import { useAuth } from '@/hooks/useAuth'
 import { Loader2, AlertCircle, FileImage, Store, Calendar, ArrowLeft, Clock, Package, ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
 
@@ -54,6 +55,7 @@ interface FlyerResponse {
 export default function UserFlyerPage() {
   const params = useParams()
   const storeId = params.store_id as string
+  const { user } = useAuth()
 
   const [flyerDataList, setFlyerDataList] = useState<FlyerResponse[]>([])
   const [loading, setLoading] = useState(true)
@@ -95,6 +97,27 @@ export default function UserFlyerPage() {
     });
   };
 
+  // フライヤービューを記録する関数
+  const recordFlyerView = async (flyerId: string) => {
+    if (!user?.id) return;
+
+    try {
+      await fetch('http://localhost:8080/api/v1/flyer/views', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          flyer_id: flyerId,
+          user_id: user.id,
+        }),
+      });
+      // エラーがあっても画面表示には影響させない（ビュー記録は非表示での処理）
+    } catch (error) {
+      console.warn('フライヤービューの記録に失敗しました:', error);
+    }
+  };
+
 
 
   useEffect(() => {
@@ -109,7 +132,15 @@ export default function UserFlyerPage() {
         const result = await response.json();
         
         // データが配列として返される
-        setFlyerDataList(Array.isArray(result.data) ? result.data : []);
+        const flyerData = Array.isArray(result.data) ? result.data : [];
+        setFlyerDataList(flyerData);
+
+        // 各フライヤーのビューを記録
+        if (user?.id && flyerData.length > 0) {
+          flyerData.forEach((flyer: FlyerResponse) => {
+            recordFlyerView(flyer.id);
+          });
+        }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An unknown error occurred');
       } finally {
@@ -118,7 +149,7 @@ export default function UserFlyerPage() {
     };
 
     fetchFlyerData();
-  }, [storeId]);
+  }, [storeId, user?.id]);
 
   if (loading) {
     return (
