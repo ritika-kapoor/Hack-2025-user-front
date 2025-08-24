@@ -34,7 +34,7 @@ export default async function RecipeDetail({id}: {id: string}) {
         id: recipeData.recipe_id,
         title: recipeData.name,
         description: recipeData.author_comment, // APIレスポンスから取得
-        image: recipeData.image_url, 
+        image: recipeData.image_url, // APIレスポンスから画像URLを取得
         ingredients: [
             ...ingredientsData.map((ing: { id: number; name: string; display_order: number; amount_text: string; }) => ({ id: ing.id, name: ing.name, amount: ing.amount_text })),
             ...seasoningsData.map((seasoning: { id: number; name: string; display_order: number; amount_text: string; }) => ({ id: seasoning.id, name: seasoning.name, amount: seasoning.amount_text }))
