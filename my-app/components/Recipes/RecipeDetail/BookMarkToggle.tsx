@@ -9,38 +9,38 @@ interface BookMarkToggleProps {
 export default function BookMarkToggle({ recipe_id }: BookMarkToggleProps) {
     const [isBookMarked, setIsBookMarked] = useState(false);
 
-    useEffect(() => {
-        const fetchBookmarkStatus = async () => {
-            const token = localStorage.getItem("token");
-            if (!token) {
-                return;
-            }
-            // Assume an API endpoint exists to check if a recipe is bookmarked
-            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/bookmarked-recipes?recipe_id=${recipe_id}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                },
-            });
+    // useEffect(() => {
+    //     const fetchBookmarkStatus = async () => {
+    //         const token = localStorage.getItem("token");
+    //         if (!token) {
+    //             return;
+    //         }
+    //         // 保存しているかどうかの確認API（まだ未実装）
+    //         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/bookmarked-recipes?recipe_id=${recipe_id}`, {
+    //             method: "GET",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 "Authorization": `Bearer ${token}`,
+    //             },
+    //         });
 
-            if (response.ok) {
-                const data = await response.json();
-                setIsBookMarked(data.isBookMarked); // Assuming the API returns { isBookMarked: boolean }
-            }
-        };
-        fetchBookmarkStatus();
-    }, [recipe_id]);
+    //         if (response.ok) {
+    //             const data = await response.json();
+    //             setIsBookMarked(data.isBookMarked); // Assuming the API returns { isBookMarked: boolean }
+    //         }
+    //     };
+    //     fetchBookmarkStatus();
+    // }, [recipe_id]);
 
     const handleBookmarkToggle = useCallback(async() => {
         const token = localStorage.getItem("token");
         if (!token) {
-            // Handle cases where token is not available (e.g., user not logged in)
+            // ログインしていない時
             return;
         }
 
         const method = isBookMarked ? "DELETE" : "POST";
-        const endpoint = isBookMarked ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/bookmarked-recipes?recipe_id=${recipe_id}` : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/bookmarked-recipes`;
+        const endpoint = isBookMarked ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/saved-recipes/${recipe_id}` : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/saved-recipes`;
 
         const response = await fetch(endpoint, {
             method: method,
