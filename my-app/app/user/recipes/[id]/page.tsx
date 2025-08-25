@@ -2,7 +2,6 @@ import RecipeDetail from "@/components/Recipes/RecipeDetail/RecipeDetail";
 import { Suspense } from "react";
 
 export default async function Page({ params }: { params: { id: string } }) {
-ManatoDevelop2
   const resolvedParams = await params;
   const { id } = resolvedParams;
   // console.log(params.id)
