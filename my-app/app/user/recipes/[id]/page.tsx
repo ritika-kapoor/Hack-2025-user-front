@@ -1,9 +1,9 @@
 import RecipeDetail from "@/components/Recipes/RecipeDetail/RecipeDetail";
 import { Suspense } from "react";
 
-export default async function Page({ params }: { params: Promise<{ id: string }> }) {
-  // console.log(params.id)
-  const { id } = await params;
+export default async function Page({ params }: { params: { id: string } }) {
+  const { id } = params; // paramsは直接オブジェクトなのでawaitは不要
+  // console.log(id)
 
   return (
     <Suspense
