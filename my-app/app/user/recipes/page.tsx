@@ -2,6 +2,8 @@ import RecipesLists from "@/components/Recipes/RecipeLists";
 import UserHeader from "@/components/Recipes/user-header";
 import { Suspense } from "react";
 
+export const dynamic = 'force-dynamic'
+
 export default async function MainRecipes() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">

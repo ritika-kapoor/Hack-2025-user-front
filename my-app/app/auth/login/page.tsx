@@ -13,19 +13,47 @@ export default function LoginPage() {
   const router = useRouter()
 
 const handleLogin = async () => {
-  const res = await fetch("/api/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include", // 👈 THIS IS IMPORTANT
-    body: JSON.stringify({ email, password }),
-  })
+  if (!email || !password) {
+    setError("メールアドレスとパスワードを入力してください")
+    return
+  }
 
-  if (res.ok) {
+  try {
+    setError("")
+    
+    const response = await fetch("http://localhost:8080/api/v1/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json()
+      throw new Error(errorData.error || "ログインに失敗しました")
+    }
+
+    const data = await response.json()
+    
+    // JWTトークンをlocalStorageに保存
+    localStorage.setItem("token", data.data.token)
+    localStorage.setItem("user", JSON.stringify({
+      id: data.data.id,
+      email: data.data.email,
+      name: data.data.name,
+    }))
+
+    console.log("ログイン成功:", data)
+    
+    // ユーザーページにリダイレクト
     router.push("/user")
-  } else {
-    setError("Invalid credentials")
+  } catch (error) {
+    console.error("ログインエラー:", error)
+    setError(error instanceof Error ? error.message : "ログインに失敗しました")
   }
 }
 
@@ -73,7 +101,7 @@ const handleLogin = async () => {
           </div>
 
           <div className="text-left">
-            <Link href="#" className="text-sm text-gray-500 hover:text-gray-700">
+            <Link href="/auth/forgot-password" className="text-sm text-gray-500 hover:text-gray-700">
               パスワードを忘れた方
             </Link>
           </div>

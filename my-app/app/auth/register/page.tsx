@@ -28,7 +28,7 @@ export default function RegisterPage() {
     setStep(2)
   }
 
-  const handleStep2Submit = () => {
+  const handleStep2Submit = async () => {
     if (!password || !passwordConfirm) {
       setError("パスワードを入力してください")
       return
@@ -41,8 +41,39 @@ export default function RegisterPage() {
       setError("パスワードは6文字以上で入力してください")
       return
     }
-    setError("")
-    setStep(3)
+    
+    try {
+      setError("")
+      
+      // emailからnameを生成（@より前の部分）
+      const name = email.split("@")[0]
+      
+      // 既存のuser登録APIに送信
+      const response = await fetch("http://localhost:8080/api/v1/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          name: name,
+        }),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || "登録に失敗しました")
+      }
+
+      const data = await response.json()
+      console.log("ユーザー登録成功:", data)
+      
+      setStep(3)
+    } catch (error) {
+      console.error("登録エラー:", error)
+      setError(error instanceof Error ? error.message : "登録に失敗しました")
+    }
   }
 
   const handleCompleteRegistration = () => {
@@ -50,57 +81,90 @@ export default function RegisterPage() {
     router.push("/user")
   }
 
-  const StepIndicator = () => (
-    <div className="flex mb-8 gap-1" style={{ backgroundColor: '#F1B300' }}>
-      {/* ステップ1: メールアドレス */}
-      <div 
-        className={`flex-1 h-12 flex items-center justify-center text-sm text-center font-medium ${
-          step === 1 ? 'text-white' : 'text-gray-700'
-        }`}
-        style={{
-          backgroundColor: step === 1 ? '#F1B300' : 'white',
-          border: step === 1 ? 'none' : '1px solid #F1B300',
-          clipPath: 'polygon(0% 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 0% 100%)',
-          marginRight: '-9px'
-        }}
-      >
-        <span>メールアドレス<br></br>送信</span>
+  // メールアドレスの入力と確認が完了しているかチェック
+  const isEmailValid = () => {
+    return email && emailConfirm && email === emailConfirm
+  }
+
+  // ステップをクリックした時の処理
+  const handleStepClick = (targetStep: number) => {
+    // step3（完了）には戻れない
+    if (step === 3) return
+    
+    if (targetStep === 1) {
+      // step1には常に戻れる
+      setStep(1)
+      setError("")
+    } else if (targetStep === 2) {
+      // step2にはメールアドレスが有効な場合のみ移動可能
+      if (isEmailValid()) {
+        setStep(2)
+        setError("")
+      } else {
+        setError("メールアドレスを正しく入力してください")
+      }
+    }
+  }
+
+  const StepIndicator = () => {
+    // 各ステップがクリック可能かどうかを判定
+    const canClickStep1 = step !== 3 // step3からは戻れない
+    const canClickStep2 = step !== 3 && isEmailValid() // step3からは戻れない、かつメールアドレスが有効
+
+    return (
+      <div className="flex mb-8 gap-1" style={{ backgroundColor: '#F1B300' }}>
+        {/* ステップ1: メールアドレス */}
+        <div 
+          className={`flex-1 h-12 flex items-center justify-center text-sm text-center font-medium ${
+            step === 1 ? 'text-white' : 'text-gray-700'
+          } ${canClickStep1 ? 'cursor-pointer hover:opacity-80' : 'cursor-default'} transition-opacity`}
+          style={{
+            backgroundColor: step === 1 ? '#F1B300' : 'white',
+            border: step === 1 ? 'none' : '1px solid #F1B300',
+            clipPath: 'polygon(0% 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 0% 100%)',
+            marginRight: '-9px'
+          }}
+          onClick={() => canClickStep1 && handleStepClick(1)}
+        >
+          <span>メールアドレス<br></br>送信</span>
+        </div>
+        
+        {/* ステップ2: パスワード設定 */}
+        <div 
+          className={`flex-1 h-12 flex items-center justify-center text-sm font-medium ${
+            step === 2 ? 'text-white' : 'text-gray-700'
+          } ${canClickStep2 ? 'cursor-pointer hover:opacity-80' : 'cursor-default'} transition-opacity`}
+          style={{
+            backgroundColor: step === 2 ? '#F1B300' : 'white',
+            border: step === 2 ? 'none' : '1px solid #F1B300',
+            clipPath: 'polygon(0% 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 0% 100%, 14px 50%)',
+            marginLeft: '-8px',
+            marginRight: '-8px',
+            paddingLeft: '12px'
+          }}
+          onClick={() => canClickStep2 && handleStepClick(2)}
+        >
+          <span>パスワード設定</span>
+        </div>
+        
+        {/* ステップ3: 登録完了 */}
+        <div 
+          className={`flex-1 h-12 flex items-center justify-center text-sm font-medium ${
+            step === 3 ? 'text-white' : 'text-gray-700'
+          } cursor-default`}
+          style={{
+            backgroundColor: step === 3 ? '#F1B300' : 'white',
+            border: step === 3 ? 'none' : '1px solid #F1B300',
+            clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 14px 50%)',
+            marginLeft: '-9px',
+            paddingLeft: '12px'
+          }}
+        >
+          <span>登録完了</span>
+        </div>
       </div>
-      
-      {/* ステップ2: パスワード設定 */}
-      <div 
-        className={`flex-1 h-12 flex items-center justify-center text-sm font-medium ${
-          step === 2 ? 'text-white' : 'text-gray-700'
-        }`}
-        style={{
-          backgroundColor: step === 2 ? '#F1B300' : 'white',
-          border: step === 2 ? 'none' : '1px solid #F1B300',
-          clipPath: 'polygon(0% 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 0% 100%, 14px 50%)',
-          marginLeft: '-8px',
-          marginRight: '-8px',
-          paddingLeft: '12px'
-        }}
-      >
-        <span>パスワード設定</span>
-      </div>
-      
-      {/* ステップ3: 登録完了 */}
-      <div 
-        className={`flex-1 h-12 flex items-center justify-center text-sm font-medium ${
-          step === 3 ? 'text-white' : 'text-gray-700'
-        }`}
-        style={{
-          backgroundColor: step === 3 ? '#F1B300' : 'white',
-          border: step === 3 ? 'none' : '1px solid #F1B300',
-          clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 14px 50%)',
-          marginLeft: '-9px',
-          paddingLeft: '12px'
-        }}
-      >
-        <span>登録完了</span>
-      </div>
-    </div>
-  )
+    )
+  }
 
   return (
     <div className="min-h-screen px-4 py-8">
