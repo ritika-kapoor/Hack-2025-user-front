@@ -1,5 +1,5 @@
 import { Bookmark } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 interface BookMarkToggleProps {
     // store_recipe: boolean;

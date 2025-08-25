@@ -5,14 +5,14 @@ import Link from "next/link";
 export default function StoreRecipeItem({ recipe }: { recipe: Recipe }) {
   return (
     <>
-      <Link href={`/user/recipes/${recipe.id}`}>
+      <Link href={`/user/recipes/${recipe.recipe_id}`}>
         <div className="self-stretch px-4 py-6 flex flex-col justify-start items-start">
           <div className="self-stretch rounded-xl inline-flex items-start gap-x-6">
             <div className="w-[120px] h-[120px] relative rounded-xl overflow-hidden">
-              {recipe.image && (
+              {recipe.image_url && (
                 <Image
-                  src={recipe.image}
-                  alt={recipe.title}
+                  src={recipe.image_url}
+                  alt={recipe.name}
                   fill
                   className="object-cover rounded-xl"
                 />
@@ -22,19 +22,19 @@ export default function StoreRecipeItem({ recipe }: { recipe: Recipe }) {
               <div className="self-stretch flex flex-col justify-start items-start gap-1">
                 <div className="self-stretch flex flex-col justify-start items-start">
                   <div className="self-stretch justify-start text-slate-500 text-sm font-normal font-['Noto_Sans_JP'] leading-tight">
-                    調理時間 {recipe.cookingTime}　{recipe.calories}
+                    調理時間 {recipe.cook_time}分　{recipe.calories}kcal
                   </div>
                 </div>
                 <div className="self-stretch flex flex-col justify-start items-start">
                   <div className="self-stretch justify-start text-zinc-900 text-base font-bold font-['Noto_Sans_JP'] leading-tight">
-                    {recipe.title}
+                    {recipe.name}
                   </div>
                 </div>
                 <div className="self-stretch flex flex-col justify-start items-start">
                   <div className="self-stretch justify-start text-slate-500 text-sm font-normal font-['Noto_Sans_JP'] leading-tight">
                     {recipe.ingredients.map((ingredient, index) => (
-                      <span key={ingredient.id}>
-                        {ingredient.name ? ` ${ingredient.name}` : ""}
+                      <span key={index}>
+                        {ingredient ? ` ${ingredient}` : ""}
                         {index < recipe.ingredients.length - 1 ? "、" : ""}
                       </span>
                     ))}
