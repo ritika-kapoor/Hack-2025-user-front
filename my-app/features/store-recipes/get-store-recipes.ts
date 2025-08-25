@@ -1,8 +1,28 @@
 import { Recipe } from "@/types/Recipe";
 
 export const getStoreRecipes = async (): Promise<Recipe[]> => {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  const response = await fetch(`${baseUrl}/api/StoreRecipe`);
-  const data = await response.json();
-  return data.filter((recipe: Recipe) => recipe.store_recipe === true);
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return [];
+    }
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/saved-recipes`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      return [];
+    }
+
+    const data = await response.json();
+    return data.data.recipes; // recipesを返す
+  } catch (error) {
+    alert(error);
+    return [];
+  }
 };

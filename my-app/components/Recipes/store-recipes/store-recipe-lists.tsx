@@ -34,10 +34,12 @@ export default function StoreRecipeLists() {
 
     return (
         <div>
-            <StoreRecipesHeader recipe={storeRecipes} setFilteredRecipes={setFilteredRecipes} />
+            {Array.isArray(storeRecipes) && (
+                <StoreRecipesHeader recipe={storeRecipes} setFilteredRecipes={setFilteredRecipes} />
+            )}
             <div className="self-stretch p-4 flex flex-col justify-start items-start">
-                {filteredRecipes.map((recipe: Recipe) => (
-                    <StoreRecipeItem key={recipe.id} recipe={recipe}/>
+                {Array.isArray(filteredRecipes) && filteredRecipes.map((recipe: Recipe) => (
+                    <StoreRecipeItem key={recipe.recipe_id} recipe={recipe}/>
                 ))}
             </div>
         </div>

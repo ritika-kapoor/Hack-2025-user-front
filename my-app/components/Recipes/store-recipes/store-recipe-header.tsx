@@ -20,17 +20,17 @@ export default function StoreRecipesHeader({ recipe, setFilteredRecipes }: Store
         // 検索
         if (searchTerm) {
             filteredRecipes = filteredRecipes.filter(r =>
-                r.title.toLowerCase().includes(searchTerm.toLowerCase())
+                r.name.toLowerCase().includes(searchTerm.toLowerCase()) // titleをnameに変更
             );
         }
 
-        // 並び替え
-        if (sortOrder === "newest") {
-            filteredRecipes.sort((a, b) => new Date(b.store_date).getTime() - new Date(a.store_date).getTime());
-        } else if (sortOrder === "oldest") {
-            filteredRecipes.sort((a, b) => new Date(a.store_date).getTime() - new Date(b.store_date).getTime());
-        }
-
+        // 並び替え (store_dateはバックエンドにないので一時的に削除)
+        // if (sortOrder === "newest") {
+        //     filteredRecipes.sort((a, b) => new Date(b.store_date).getTime() - new Date(a.store_date).getTime());
+        // } else if (sortOrder === "oldest") {
+        //     filteredRecipes.sort((a, b) => new Date(a.store_date).getTime() - new Date(b.store_date).getTime());
+        // }
+        
         setFilteredRecipes(filteredRecipes);
     }, [searchTerm, sortOrder, recipe, setFilteredRecipes]);
 
