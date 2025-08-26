@@ -2,12 +2,12 @@ import { Bookmark } from "lucide-react";
 import { useCallback, useState } from "react";
 
 interface BookMarkToggleProps {
-    // store_recipe: boolean;
     recipe_id: string;
+    saved_flg: boolean;
 }
 
-export default function BookMarkToggle({ recipe_id }: BookMarkToggleProps) {
-    const [isBookMarked, setIsBookMarked] = useState(false);
+export default function BookMarkToggle({ recipe_id, saved_flg }: BookMarkToggleProps) {
+    const [isBookMarked, setIsBookMarked] = useState(saved_flg);
 
     // useEffect(() => {
     //     const fetchBookmarkStatus = async () => {

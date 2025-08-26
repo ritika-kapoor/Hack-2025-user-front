@@ -62,5 +62,6 @@ export function useAuth() {
     logout,
     requireAuth,
     checkAuth,
+    token: typeof window !== 'undefined' ? localStorage.getItem("token") : null,
   }
 }

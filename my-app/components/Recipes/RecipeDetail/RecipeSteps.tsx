@@ -1,6 +1,7 @@
 interface Step {
     id: number;
-    description: string;
+    instruction: string;
+    step_number: number;
 }
 
 interface RecipeStepsProps {
@@ -14,12 +15,12 @@ export default function RecipeSteps({ steps, cookingPoint }: RecipeStepsProps) {
             <div className="self-stretch flex flex-col justify-start items-start gap-4">
                 <div className="text-zinc-800 text-xl font-bold font-['Noto_Sans_JP'] leading-tight">手順</div>
                 <div className="self-stretch flex flex-col justify-start items-start gap-3">
-                    {steps.map((step, index) => (
+                    {steps.map((step) => (
                         <div key={step.id} className="self-stretch inline-flex justify-start items-start gap-2">
                             <div className="w-6 h-6 bg-stone-700 rounded-full flex items-center justify-center text-white text-sm font-normal font-['Noto_Sans_JP'] leading-tight flex-shrink-0">
-                                {index + 1}
+                                {step.step_number}
                             </div>
-                            <div className="text-zinc-800 text-sm font-normal font-['Noto_Sans_JP'] leading-tight">{step.description}</div>
+                            <div className="text-zinc-800 text-sm font-normal font-['Noto_Sans_JP'] leading-tight">{step.instruction}</div>
                         </div>
                     ))}
                 </div>
