@@ -1,8 +1,18 @@
-import type { RecipeDetail } from "@/types/RecipeDetail";
+import type { RecipeDetail, RecipeApiResponse } from "@/types/RecipeDetail";
 
-export const getSingleRecipe = async (id: string): Promise<RecipeDetail | null> => {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  const response = await fetch(`${baseUrl}/api/ShowRecipe?id=${id}`);
+export const getSingleRecipe = async (id: string, token: string | null): Promise<RecipeDetail | null> => {
+
+  const headers: HeadersInit = {
+    "Content-Type": "application/json",
+  };
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/recipes/${id}`, {
+    headers: headers,
+  });
 
   if (!response.ok) {
     // エラーレスポンスの場合
@@ -10,6 +20,24 @@ export const getSingleRecipe = async (id: string): Promise<RecipeDetail | null> 
     return null;
   }
 
-  const data: RecipeDetail = await response.json();
-  return data;
+  const apiResponse: RecipeApiResponse = await response.json();
+
+  const recipeDetail: RecipeDetail = {
+      recipe_id: apiResponse.data.recipe.recipe_id,
+      name: apiResponse.data.recipe.name,
+      author_comment: apiResponse.data.recipe.author_comment,
+      cook_time: apiResponse.data.recipe.cook_time,
+      calories: apiResponse.data.recipe.calories,
+      total_price: apiResponse.data.recipe.total_price,
+      cooking_point: apiResponse.data.recipe.cooking_point,
+      image_url: apiResponse.data.recipe.image_url,
+      created_at: apiResponse.data.recipe.created_at,
+      updated_at: apiResponse.data.recipe.updated_at,
+      ingredients: apiResponse.data.ingredients,
+      seasonings: apiResponse.data.seasonings,
+      steps: apiResponse.data.steps,
+      saved_flg: apiResponse.data.saved_flg,
+  };
+
+  return recipeDetail;
 };
