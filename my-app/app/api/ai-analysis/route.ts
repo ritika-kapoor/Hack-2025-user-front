@@ -15,16 +15,27 @@ export async function POST(request: Request) {
     }
 
     console.log("🔍 Starting AI analysis via backend...")
+    console.log("🔑 Token received:", token ? `${token.substring(0, 20)}...` : "No token")
 
     // Extract base64 data from the image URL
     const base64Data = imageDataUrl.split(',')[1]
 
-    // Call the backend API (no authentication required for testing)
-    const response = await fetch(`${BACKEND_API_URL}/api/v1/recipes-from-image`, {
+    // Call the backend API with authentication
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json'
+    }
+    
+    // Add Authorization header if token is provided
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`
+      console.log("🔑 Sending Authorization header:", `Bearer ${token.substring(0, 20)}...`)
+    } else {
+      console.log("⚠️ No token provided, sending request without authentication")
+    }
+
+    const response = await fetch(`http://localhost:8080/api/v1/recipes-from-image`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers,
       body: JSON.stringify({
         image_base64: base64Data
       })
