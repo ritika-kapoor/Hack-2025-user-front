@@ -1,0 +1,64 @@
+import { NextResponse } from "next/server"
+
+// Backend API configuration
+const BACKEND_API_URL = process.env.BACKEND_API_URL || "http://localhost:8080"
+
+export async function POST(request: Request) {
+  try {
+    const { imageDataUrl, token } = await request.json()
+
+    if (!imageDataUrl) {
+      return NextResponse.json(
+        { error: "Image data is required" },
+        { status: 400 }
+      )
+    }
+
+    console.log("🔍 Starting AI analysis via backend...")
+
+    // Extract base64 data from the image URL
+    const base64Data = imageDataUrl.split(',')[1]
+
+    // Call the backend API (no authentication required for testing)
+    const response = await fetch(`${BACKEND_API_URL}/api/v1/recipes-from-image`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        image_base64: base64Data
+      })
+    })
+
+    if (!response.ok) {
+      const errorText = await response.text()
+      console.error(`Backend API error ${response.status}:`, errorText)
+      throw new Error(`Backend API error: ${response.status} - ${errorText}`)
+    }
+
+    const data = await response.json()
+    
+    // Extract ingredients from backend response
+    const ingredients = data.data?.extracted_ingredients || []
+    
+    console.log("🥕 Detected Ingredients from Backend:", ingredients)
+
+    return NextResponse.json({
+      ingredients: ingredients,
+      recipes: data.data?.recipes || [],
+      confidence: 0.9
+    })
+
+  } catch (error) {
+    console.error("❌ AI Analysis Error:", error)
+    
+    // Fallback response
+    return NextResponse.json({
+      ingredients: ["にんじん", "玉ねぎ", "キャベツ"],
+      recipes: [],
+      analysis: "画像の分析中にエラーが発生しました。基本的な食材を提案します。",
+      confidence: 0.5,
+      error: error instanceof Error ? error.message : "Unknown error"
+    }, { status: 500 })
+  }
+} 

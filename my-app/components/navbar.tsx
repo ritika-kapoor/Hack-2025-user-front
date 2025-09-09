@@ -11,6 +11,19 @@ export default function Navbar() {
     return pathname === path || pathname.startsWith(`${path}/`)
   }
 
+  // Hide navbar on home, camera, and loading pages
+  const shouldHideNavbar = () => {
+    // Check if we're on the user home page (which handles camera and loading states)
+    if (pathname === '/user') {
+      return true
+    }
+    return false
+  }
+
+  if (shouldHideNavbar()) {
+    return null
+  }
+
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-background border-t z-50">
       <div className="flex justify-around items-center h-16">
