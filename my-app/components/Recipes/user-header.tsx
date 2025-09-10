@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 import {
   Select,
   SelectContent,
@@ -11,11 +12,11 @@ import {
 import { ArrowLeft } from 'lucide-react';
 
 interface UserHeaderProps {
-  onSortChange: (value: string) => void;
-  currentSort: string;
+  onCategoryChange: (category: string) => void;
 }
 
-export default function UserHeader({ onSortChange, currentSort }: UserHeaderProps) {
+export default function UserHeader({ onCategoryChange }: UserHeaderProps) {
+  const [selectedCategory, setSelectedCategory] = useState('ai_recommended_recipes');
   return (
     <>
       <div className="self-stretch px-4 py-2 bg-stone-100 inline-flex justify-between items-center">
@@ -28,13 +29,21 @@ export default function UserHeader({ onSortChange, currentSort }: UserHeaderProp
               </div>
               {/* レシピ一覧をabsoluteで中央に配置 */}
               <div className="absolute left-1/2 -translate-x-1/2 text-center text-neutral-900 text-sm font-bold font-['Noto_Sans_JP'] leading-snug">レシピ一覧</div>
-              <Select value={currentSort} onValueChange={onSortChange}>
+              <Select 
+                value={selectedCategory} 
+                onValueChange={(value) => {
+                  setSelectedCategory(value);
+                  onCategoryChange(value);
+                }}
+              >
                 <SelectTrigger className="h-6 p-2 bg-white rounded flex justify-end items-center gap-1 w-fit">
-                  <SelectValue placeholder="並び替え" />
+                  <SelectValue placeholder="カテゴリー" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="おすすめ">おすすめ</SelectItem>
-                  <SelectItem value="調理時間">調理時間</SelectItem>
+                  <SelectItem value="ai_recommended_recipes">AIおすすめ</SelectItem>
+                  <SelectItem value="low_calorie_recipes">カロリー</SelectItem>
+                  <SelectItem value="low_price_recipes">価格</SelectItem>
+                  <SelectItem value="quick_cook_recipes">調理時間</SelectItem>
                 </SelectContent>
               </Select>
           </div>
