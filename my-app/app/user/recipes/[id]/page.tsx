@@ -1,7 +1,7 @@
 import RecipeDetail from "@/components/Recipes/RecipeDetail/RecipeDetail";
 import { Suspense } from "react";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
   const { id } = resolvedParams;
   // console.log(params.id)

@@ -7,9 +7,9 @@ interface LoadingAnimationProps {
   detectedIngredients?: string[]
 }
 
-export default function LoadingAnimation({ imageDataUrl, detectedIngredients }: LoadingAnimationProps) {
+export default function LoadingAnimation({ }: LoadingAnimationProps) {
   const [progress, setProgress] = useState(0)
-  const [currentStep, setCurrentStep] = useState(0)
+  const [, setCurrentStep] = useState(0)
   
   const steps = [
     "画像を分析中...",

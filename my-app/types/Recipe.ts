@@ -1,10 +1,20 @@
 export interface Recipe {
     recipe_id: string;
-    name: string; // titleをnameに変更
-    cook_time: number; // cookingTimeをcook_timeに変更し、型をnumberに
-    calories: number; // 型をnumberに
-    image_url: string; // imageをimage_urlに変更
-    ingredients: string[]; // 型をstring[]に変更
-    // description, steps, cookingPoint, store_recipe, store_date はバックエンドのレスポンスにないので削除またはオプションにする
-    seasonings: string[]; // 新しく追加
+    name: string;
+    cook_time: number;
+    calories: number;
+    total_price: number;
+    image_url: string;
+    ingredients: string[];
+    seasonings: string[];
+    saved_flg: boolean;
+}
+
+// レシピカテゴリ別のデータ構造
+export interface RecipeData {
+    extracted_ingredients: string[];
+    low_calorie_recipes: Recipe[];
+    low_price_recipes: Recipe[];
+    quick_cook_recipes: Recipe[];
+    ai_recommended_recipes: Recipe[];
 }

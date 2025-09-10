@@ -1,8 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Loader2 } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
+// import { Loader2 } from "lucide-react"
+// import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import CameraCapture from "@/components/camera-capture"
 import LoadingAnimation from "@/components/loading-animation"
