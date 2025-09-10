@@ -154,13 +154,17 @@ export default function CameraCapture({ onImageCapture, onBack }: CameraCaptureP
         console.log("🤖 AI Analysis Result:", data)
         
         const ingredients = data.ingredients || []
-        const recipes = data.recipes || []
+        const recipes = data.recipes || {}
         
         setAnalysisResult(ingredients)
         
         // Store ingredients and recipes in localStorage
         localStorage.setItem('detectedIngredients', JSON.stringify(ingredients))
-        localStorage.setItem('aiRecommendations', JSON.stringify(recipes))
+        localStorage.setItem('extracted_ingredients', JSON.stringify(ingredients))
+        localStorage.setItem('low_calorie_recipes', JSON.stringify(recipes.low_calorie_recipes || []))
+        localStorage.setItem('low_price_recipes', JSON.stringify(recipes.low_price_recipes || []))
+        localStorage.setItem('quick_cook_recipes', JSON.stringify(recipes.quick_cook_recipes || []))
+        localStorage.setItem('ai_recommended_recipes', JSON.stringify(recipes.ai_recommended_recipes || []))
         localStorage.setItem('aiAnalysisResult', JSON.stringify(data))
         
         // Call the parent callback with image and ingredients
