@@ -56,7 +56,12 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       ingredients: ingredients,
-      recipes: data.data?.recipes || [],
+      recipes: {
+        low_calorie_recipes: data.data?.low_calorie_recipes || [],
+        low_price_recipes: data.data?.low_price_recipes || [],
+        quick_cook_recipes: data.data?.quick_cook_recipes || [],
+        ai_recommended_recipes: data.data?.ai_recommended_recipes || []
+      },
       confidence: 0.9
     })
 
