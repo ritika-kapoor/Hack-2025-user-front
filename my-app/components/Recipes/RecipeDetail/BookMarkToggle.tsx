@@ -9,29 +9,6 @@ interface BookMarkToggleProps {
 export default function BookMarkToggle({ recipe_id, saved_flg }: BookMarkToggleProps) {
     const [isBookMarked, setIsBookMarked] = useState(saved_flg);
 
-    // useEffect(() => {
-    //     const fetchBookmarkStatus = async () => {
-    //         const token = localStorage.getItem("token");
-    //         if (!token) {
-    //             return;
-    //         }
-    //         // 保存しているかどうかの確認API（まだ未実装）
-    //         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/bookmarked-recipes?recipe_id=${recipe_id}`, {
-    //             method: "GET",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 "Authorization": `Bearer ${token}`,
-    //             },
-    //         });
-
-    //         if (response.ok) {
-    //             const data = await response.json();
-    //             setIsBookMarked(data.isBookMarked); // Assuming the API returns { isBookMarked: boolean }
-    //         }
-    //     };
-    //     fetchBookmarkStatus();
-    // }, [recipe_id]);
-
     const handleBookmarkToggle = useCallback(async() => {
         const token = localStorage.getItem("token");
         if (!token) {
@@ -39,8 +16,9 @@ export default function BookMarkToggle({ recipe_id, saved_flg }: BookMarkToggleP
             return;
         }
 
+        const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
         const method = isBookMarked ? "DELETE" : "POST";
-        const endpoint = isBookMarked ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/saved-recipes/${recipe_id}` : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/saved-recipes`;
+        const endpoint = isBookMarked ? `${baseUrl}/api/v1/saved-recipes/${recipe_id}` : `${baseUrl}/api/v1/saved-recipes`;
 
         const response = await fetch(endpoint, {
             method: method,

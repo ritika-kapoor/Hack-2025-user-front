@@ -10,9 +10,12 @@ export const getSingleRecipe = async (id: string, token: string | null): Promise
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/recipes/${id}`, {
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
+  const response = await fetch(`${baseUrl}/api/v1/recipes/${id}`, {
     headers: headers,
   });
+
+  
 
   if (!response.ok) {
     // エラーレスポンスの場合

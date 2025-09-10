@@ -7,7 +7,8 @@ export const getStoreRecipes = async (): Promise<Recipe[]> => {
       return [];
     }
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/saved-recipes`, {
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
+    const response = await fetch(`${baseUrl}/api/v1/saved-recipes`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
