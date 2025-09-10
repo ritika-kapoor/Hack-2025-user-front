@@ -135,7 +135,7 @@ export async function POST(request: Request) {
     // Score recipes based on ingredient matches
     const scoredRecipes = dummyRecipes.map(recipe => {
       let score = 0
-      let matchedIngredients: string[] = []
+      const matchedIngredients: string[] = []
       
       // Check each recipe ingredient against detected ingredients
       recipe.ingredients.forEach(recipeIngredient => {

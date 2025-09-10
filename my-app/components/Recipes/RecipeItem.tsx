@@ -2,17 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Bookmark } from "lucide-react";
 
+import { Recipe } from "@/types/Recipe";
+
 interface RecipeItemProps {
-  recipe: {
-    recipe_id: string | number;
-    name: string;
-    image_url?: string; // Changed from image?: string;
-    cook_time?: string;
-    calories?: string;
-    ingredients: string[]; // Changed from Array<{ id: string | number; name: string; }>
-    store_recipe?: boolean;
-    total_price?: string;
-  };
+  recipe: Recipe;
 }
 
 export default function RecipeItem({ recipe }: RecipeItemProps) {
@@ -33,7 +26,7 @@ export default function RecipeItem({ recipe }: RecipeItemProps) {
               <div className="w-10 h-10 absolute bottom-1 right-1">
                 <div className="w-10 h-10 left-0 top-0 absolute opacity-40 bg-zinc-800 rounded-full"></div>
                 <Bookmark
-                  className={`absolute left-[calc(50%-14px)] top-[calc(50%-14px)] ${recipe.store_recipe ? "fill-yellow-500 text-yellow-500" : "text-white"}`}
+                  className={`absolute left-[calc(50%-14px)] top-[calc(50%-14px)] ${recipe.saved_flg ? "fill-yellow-500 text-yellow-500" : "text-white"}`}
                   size={30}
                 />
               </div>

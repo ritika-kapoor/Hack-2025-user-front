@@ -1,7 +1,7 @@
 import { RecipeData } from "@/types/Recipe";
 import { NextResponse } from "next/server"
 
-export const mockRecipeData: RecipeData = {
+const mockRecipeData: RecipeData = {
     extracted_ingredients: [
       "ジュース",
       "ドレッシング",

@@ -1,5 +1,6 @@
 'use client';
 
+import { Recipe } from "@/types/Recipe";
 // このページはレシピの一覧を表示するページです。
 // 親からpropsでレシピのデータを受け取って、それをRecipesItemsコンポーネントに渡します。
 import RecipeItem from "./RecipeItem";
@@ -10,7 +11,7 @@ interface RecipesListsProps {
 }
 
 export default function RecipesLists({ selectedCategory }: RecipesListsProps) {
-    const [recipes, setRecipes] = useState<any[]>([]);
+    const [recipes, setRecipes] = useState<Recipe[]>([]);
 
     useEffect(() => {
         // localStorageから選択されたカテゴリのレシピを取得

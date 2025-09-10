@@ -1,6 +1,6 @@
-import { Recipe } from "@/types/Recipe";
+import { RecipeData } from "@/types/Recipe";
 
-export const getRecipes = async (): Promise<Recipe[]> => {
+export const getRecipes = async (): Promise<RecipeData> => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   try {
     const response = await fetch(`${baseUrl}/api/Recipe`);

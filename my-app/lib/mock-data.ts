@@ -1,3 +1,5 @@
+// これはrecipe一覧のモックデータです。・一覧に表示されること・詳細に飛んで詳細画面も表示されること確認いたしました。（※dbに登録しているIDと一致していないためモックでは直接DBのIDを参照して確認）
+
 import { RecipeData } from "@/types/Recipe";
 
 export const mockRecipeData: RecipeData = {
