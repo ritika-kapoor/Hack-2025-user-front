@@ -28,20 +28,20 @@ export default function StoreRecipeLists() {
         return <div>Loading...</div>;
     }
 
-    if (!storeRecipes || storeRecipes.length === 0) {
-        return <div>レシピが見つかりませんでした。</div>; 
-    }
-
     return (
         <div>
-            {Array.isArray(storeRecipes) && (
-                <StoreRecipesHeader recipe={storeRecipes} setFilteredRecipes={setFilteredRecipes} />
+            <StoreRecipesHeader recipe={storeRecipes} setFilteredRecipes={setFilteredRecipes} />
+            {!storeRecipes || storeRecipes.length === 0 ? (
+                <div className="self-stretch p-4 flex flex-col justify-center items-center">
+                    <p className="text-gray-500">保存したレシピが見つかりませんでした。</p>
+                </div>
+            ) : (
+                <div className="self-stretch p-4 flex flex-col justify-start items-start">
+                    {Array.isArray(filteredRecipes) && filteredRecipes.map((recipe: Recipe) => (
+                        <StoreRecipeItem key={recipe.recipe_id} recipe={recipe}/>
+                    ))}
+                </div>
             )}
-            <div className="self-stretch p-4 flex flex-col justify-start items-start">
-                {Array.isArray(filteredRecipes) && filteredRecipes.map((recipe: Recipe) => (
-                    <StoreRecipeItem key={recipe.recipe_id} recipe={recipe}/>
-                ))}
-            </div>
         </div>
     )
 }

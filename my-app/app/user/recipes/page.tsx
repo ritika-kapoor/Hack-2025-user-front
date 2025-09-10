@@ -1,13 +1,9 @@
-'use client';
-
-import RecipesLists from "@/components/Recipes/RecipeLists";
-import UserHeader from "@/components/Recipes/user-header";
-import { Suspense, useState } from "react";
+import RecipesContainer from "../../../components/Recipes/RecipesContainer";
+import { Suspense } from "react";
 
 export default function MainRecipes() {
-  const [selectedCategory, setSelectedCategory] = useState('ai_recommended_recipes');
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center min-h-screen">
       <Suspense
         fallback={
           <div className="flex justify-center items-center h-64">
@@ -16,10 +12,7 @@ export default function MainRecipes() {
           </div>
         }
       >
-        <div className="flex flex-col items-center">
-          <UserHeader onCategoryChange={setSelectedCategory} />
-          <RecipesLists selectedCategory={selectedCategory} />
-        </div>
+        <RecipesContainer />
       </Suspense>
     </div>
   )

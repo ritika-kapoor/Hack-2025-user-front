@@ -25,7 +25,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-background border-t z-50">
+    <nav className="fixed left-0 right-0 bottom-0 w-[393px] mx-auto bg-background border-t z-50">
       <div className="flex justify-around items-center h-16">
         <Link
           href="/user"
