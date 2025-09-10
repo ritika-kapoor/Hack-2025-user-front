@@ -24,8 +24,12 @@ export default function Navbar() {
     return null
   }
 
+  if (pathname === '/auth/login') {
+    return null
+  }
+
   return (
-    <nav className="fixed left-0 right-0 bottom-0 w-[393px] mx-auto bg-background border-t z-50">
+    <nav className="fixed left-0 right-0 bottom-0 w-[393px] mx-auto bg-stone-100 border-t z-50">
       <div className="flex justify-around items-center h-16">
         <Link
           href="/user"
@@ -34,7 +38,7 @@ export default function Navbar() {
           }`}
         >
           <Home className="h-5 w-5" />
-          <span className="text-xs mt-1">Home</span>
+          <span className="text-xs mt-1">ホーム</span>
         </Link>
 
         <Link
@@ -44,17 +48,17 @@ export default function Navbar() {
           }`}
         >
           <BookOpen className="h-5 w-5" />
-          <span className="text-xs mt-1">Recipes</span>
+          <span className="text-xs mt-1">レシピ</span>
         </Link>
 
         <Link
-          href="/user/favorites"
+          href="/user/recipes/store-recipes"
           className={`flex flex-col items-center justify-center w-full h-full ${
-            isActive("/user/favorites") ? "text-primary" : "text-muted-foreground"
+            isActive("/user/recipes/store-recipes") ? "text-primary" : "text-muted-foreground"
           }`}
         >
           <Bookmark className="h-5 w-5" />
-          <span className="text-xs mt-1">Grocery</span>
+          <span className="text-xs mt-1">保存リスト</span>
         </Link>
 
         <Link
@@ -64,7 +68,7 @@ export default function Navbar() {
           }`}
         >
           <User className="h-5 w-5" />
-          <span className="text-xs mt-1">Profile</span>
+          <span className="text-xs mt-1">マイページ</span>
         </Link>
       </div>
     </nav>

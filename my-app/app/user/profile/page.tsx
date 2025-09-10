@@ -267,7 +267,7 @@ export default function ProfilePage() {
   return (
     <AuthGuard>
       <main className="container mx-auto px-4 pb-24 pt-6">
-        <div className="max-w-2xl mx-auto space-y-8">
+        <div className="w-[393px] mx-auto space-y-8">
           {/* ヘッダー */}
           <div className="rounded-2xl p-6 text-white" style={{ background: 'linear-gradient(135deg, #563124, #F1B300)' }}>
             <div className="flex items-center space-x-3">
