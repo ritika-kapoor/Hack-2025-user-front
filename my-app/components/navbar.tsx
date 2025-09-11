@@ -13,6 +13,10 @@ export default function Navbar() {
 
   // Hide navbar on home, camera, and loading pages
   const shouldHideNavbar = () => {
+    // Check if we're on the main homepage
+    if (pathname === '/') {
+      return true
+    }
     // Check if we're on the user home page (which handles camera and loading states)
     if (pathname === '/user') {
       return true
