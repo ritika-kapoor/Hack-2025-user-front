@@ -14,12 +14,9 @@ export default function Home() {
             <img 
               src="/images/meguru_logo.png" 
               alt="meguru" 
-              className="h-16 mx-auto"
+              className="h-24 mx-auto"
             />
           </div>
-          <h1 className="text-5xl font-bold mb-4" style={{ color: '#563124' }}>
-            Meguru
-          </h1>
           <p className="text-xl mb-8" style={{ color: '#563124' }}>
             食品ロスを減らし、お金を節約し、環境を守る
           </p>
@@ -43,14 +40,13 @@ export default function Home() {
                 <li>• 食品ロス削減をトラッキング</li>
                 <li>• お得な食材で美味しい料理を作成</li>
               </ul>
-              <Link href="/auth/login" className="block">
-                <Button 
-                  className="w-full text-white text-lg py-6 rounded-lg hover:opacity-90 transition-all"
-                  style={{ backgroundColor: '#F1B300' }}
-                >
-                  ログインして始める
-                </Button>
-              </Link>
+              <Button 
+                className="w-full text-white text-lg py-6 rounded-lg hover:opacity-90 transition-all"
+                style={{ backgroundColor: '#F1B300' }}
+                onClick={() => window.open('https://www.meguru-food.jp/', '_blank')}
+              >
+                ログインして始める
+              </Button>
             </CardContent>
           </Card>
 
