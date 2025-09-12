@@ -40,13 +40,14 @@ export default function Home() {
                 <li>• 食品ロス削減をトラッキング</li>
                 <li>• お得な食材で美味しい料理を作成</li>
               </ul>
-              <Button 
-                className="w-full text-white text-lg py-6 rounded-lg hover:opacity-90 transition-all"
-                style={{ backgroundColor: '#F1B300' }}
-                onClick={() => window.open('https://www.meguru-food.jp/', '_blank')}
-              >
-                ログインして始める
-              </Button>
+              <Link href="/auth/login" className="block">
+                <Button 
+                  className="w-full text-white text-lg py-6 rounded-lg hover:opacity-90 transition-all"
+                  style={{ backgroundColor: '#F1B300' }}
+                >
+                  ログインして始める
+                </Button>
+              </Link>
             </CardContent>
           </Card>
 
