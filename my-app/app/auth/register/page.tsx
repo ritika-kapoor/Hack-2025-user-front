@@ -175,7 +175,9 @@ export default function RegisterPage() {
           <img 
             src="/images/meguru_logo.png" 
             alt="meguru" 
-            className="h-12 mx-auto"
+            className="mx-auto"
+            width={254}
+            height={70}
           />
         </div>
 
@@ -222,7 +224,7 @@ export default function RegisterPage() {
 
             <Button
               onClick={handleStep1Submit}
-              className="w-full h-12 text-white font-medium rounded-lg hover:opacity-90 transition-all"
+              className="w-full h-12 text-white font-medium rounded-full hover:opacity-90 transition-all"
               style={{ backgroundColor: '#F1B300' }}
             >
               送信する
@@ -265,7 +267,7 @@ export default function RegisterPage() {
 
             <Button
               onClick={handleStep2Submit}
-              className="w-full h-12 text-white font-medium rounded-lg hover:opacity-90 transition-all"
+              className="w-full h-12 text-white font-medium rounded-full hover:opacity-90 transition-all"
               style={{ backgroundColor: '#F1B300' }}
             >
               送信する
@@ -277,20 +279,20 @@ export default function RegisterPage() {
         {step === 3 && (
           <div className="space-y-8 text-center">
             <div className="space-y-4">
-              <h2 className="text-xl text-gray-900">
-                新規会員登録が<br />完了しました
-              </h2>
-              <p className="text-sm text-gray-600">
+            <div className="self-stretch h-20 mt-[70px] text-center justify-start text-zinc-800 text-2xl font-normal font-['Noto_Sans_JP']">
+              新規会員登録が<br/>完了しました
+            </div>
+              <p className="text-sm text-gray-600 mt-[14px] mb-[88px]">
                 ホームに戻り献立レシピを作りましょう
               </p>
             </div>
 
             <Button
               onClick={handleCompleteRegistration}
-              className="w-full h-12 text-white font-medium rounded-lg hover:opacity-90 transition-all"
+              className="w-full h-12 text-white font-medium rounded-full hover:opacity-90 transition-all"
               style={{ backgroundColor: '#F1B300' }}
             >
-              レシピを作る
+              レシピを探す
             </Button>
           </div>
         )}

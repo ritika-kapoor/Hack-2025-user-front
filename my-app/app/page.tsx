@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+// import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
@@ -43,7 +43,7 @@ export default function Home() {
               <Button 
                 className="w-full text-white text-lg py-6 rounded-lg hover:opacity-90 transition-all"
                 style={{ backgroundColor: '#F1B300' }}
-                onClick={() => window.open('https://www.meguru-food.jp/', '_blank')}
+                onClick={() => window.open('https://www.meguru-food.jp/auth/login', '_blank')}
               >
                 ログインして始める
               </Button>

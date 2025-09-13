@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
@@ -66,7 +67,9 @@ const handleLogin = async () => {
           <img 
             src="/images/meguru_logo.png" 
             alt="meguru" 
-            className="h-12 mx-auto"
+            className="mx-auto"
+            width={254}
+            height={70}
           />
         </div>
 
@@ -102,7 +105,8 @@ const handleLogin = async () => {
           </div>
 
           <div className="text-left">
-            <Link href="/auth/forgot-password" className="text-sm text-gray-500 hover:text-gray-700">
+            <Link href="/auth/forgot-password" className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-3">
+            <Image src="/images/Vector 35.svg" alt="meguru" width={6} height={9} />
               パスワードを忘れた方
             </Link>
           </div>
@@ -115,7 +119,7 @@ const handleLogin = async () => {
 
           <Button
             onClick={handleLogin}
-            className="w-full h-12 text-white font-medium rounded-lg hover:opacity-90 transition-all"
+            className="w-full h-12 text-white font-medium rounded-full hover:opacity-90 transition-all"
             style={{ backgroundColor: '#F1B300' }}
           >
             ログインする
@@ -124,7 +128,7 @@ const handleLogin = async () => {
           <Button
             variant="outline"
             asChild
-            className="w-full h-12 font-medium rounded-lg border-2 hover:bg-gray-50 transition-all"
+            className="w-full h-12 font-medium rounded-full border-2 hover:bg-gray-50 transition-all"
             style={{ borderColor: '#F1B300', color: '#F1B300' }}
           >
             <Link href="/auth/register">新規登録</Link>
