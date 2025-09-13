@@ -112,7 +112,9 @@ export default function ForgotPasswordPage() {
           <img 
             src="/images/meguru_logo.png" 
             alt="meguru" 
-            className="h-12 mx-auto"
+            className="mx-auto"
+            width={254}
+            height={70}
           />
         </div>
 
