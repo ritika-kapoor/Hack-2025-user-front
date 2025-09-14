@@ -35,8 +35,8 @@ export default function StoreRecipesHeader({ recipe, setFilteredRecipes }: Store
     }, [searchTerm, sortOrder, recipe, setFilteredRecipes]);
 
     return (
-        <div className="bg-stone-100">
-            <div className="self-stretch px-[16px] py-[8px] w-[390px] bg-stone-100 inline-flex justify-between items-center">
+        <div className="bg-[#F7F4F4]">
+            <div className="self-stretch px-[16px] py-[8px] w-[390px] bg-[#F7F4F4] inline-flex justify-between items-center">
                 <div className="w-96 relative flex justify-between items-center">
                     <div className="w-6 h-6 relative"></div>
                     <div className="h-6 p-2 bg-white rounded flex justify-end items-center gap-1">
