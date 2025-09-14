@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import AuthGuard from "@/components/AuthGuard"
 import { useAuth } from "@/hooks/useAuth"
-import { User, LogOut, MapPin, Loader2, CheckCircle, AlertCircle, Search, Store } from "lucide-react"
+import { User, LogOut, MapPin, Loader2, CheckCircle, AlertCircle, Search, Store, Info } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -269,10 +269,10 @@ export default function ProfilePage() {
 
   return (
     <AuthGuard>
-      <main className="container mx-auto px-4 pb-24 pt-6">
-        <div className="w-[393px] mx-auto space-y-8">
+      <main className="w-[390px] mx-auto">
+        <div className="w-[390px] mx-auto">
           {/* ヘッダー */}
-          <div className="rounded-2xl p-6 text-white" style={{ background: 'linear-gradient(135deg, #563124, #F1B300)' }}>
+          <div className="rounded-2xl p-6 text-white bg-[#F1B300]">
             <div className="flex items-center space-x-3">
               <div className="bg-white rounded-full p-3">
                 <User className="w-6 h-6" style={{ color: '#563124' }} />
@@ -480,7 +480,7 @@ export default function ProfilePage() {
                     disabled={isSubmitting}
                     className="w-full text-white font-semibold h-12 rounded-xl transition-all hover:opacity-90"
                     style={{ 
-                      background: 'linear-gradient(135deg, #563124, #F1B300)',
+                      background: '#F1B300',
                       border: 'none'
                     }}
                   >
@@ -587,11 +587,12 @@ export default function ProfilePage() {
             <CardContent className="p-6">
               <div className="flex items-center space-x-2 mb-4">
                 <div className="rounded-full p-2" style={{ backgroundColor: '#F1B300' }}>
-                  <span className="text-white text-sm">💡</span>
+                  {/* ヒントカードのアイコン(lucide-reactのヒントカードアイコン) */}
+                  <span className="text-white text-sm"><Info className="w-5 h-5" /></span>
                 </div>
                 <h3 className="font-semibold" style={{ color: '#563124' }}>お役立ち情報</h3>
               </div>
-              <div className="space-y-3 text-sm text-gray-600">
+              <div className="mb-6 text-sm text-gray-600">
                 <p>• 郵便番号（7桁）を入力すると住所が自動で入力されます</p>
                 <p>• 住所を登録すると、近隣店舗のお得な情報やタイムセールが表示されます</p>
                 <p>• プロファイル情報は安全に暗号化されて保存されます</p>
