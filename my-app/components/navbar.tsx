@@ -37,7 +37,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="fixed left-0 right-0 bottom-0 w-[440px] mx-auto bg-stone-100 border-t z-50">
+    <nav className="fixed left-0 right-0 bottom-0 w-[390px] mx-auto bg-stone-100 border-t z-50">
       <div className="flex justify-around items-center h-16">
         <Link
           href="/user"

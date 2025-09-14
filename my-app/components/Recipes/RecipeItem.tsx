@@ -13,7 +13,7 @@ export default function RecipeItem({ recipe }: RecipeItemProps) {
     <>
       <Link href={`/user/recipes/${recipe.recipe_id}`}>
         <div className="self-stretch py-[16px] flex flex-col justify-start items-start">
-          <div className="self-stretch rounded-xl inline-flex items-start gap-x-6">
+          <div className="self-stretch rounded-xl inline-flex items-start ml-[16px]">
             <div className="w-[120px] h-[120px] relative rounded-xl overflow-hidden">
               {recipe.image_url && (
                 <Image
@@ -43,7 +43,7 @@ export default function RecipeItem({ recipe }: RecipeItemProps) {
               </div>
             </div>
             <div className="w-56 inline-flex flex-col justify-start items-start gap-4">
-              <div className="self-stretch flex flex-col justify-start items-start gap-1">
+              <div className="self-stretch flex flex-col justify-start items-start ml-[16px]">
                 <div className="self-stretch flex flex-col justify-start items-start">
                   <div className="self-stretch justify-start text-slate-500 text-sm font-normal font-['Noto_Sans_JP'] leading-tight">
                     調理時間 {recipe.cook_time}分　{recipe.calories}kcal　{recipe.total_price}円
