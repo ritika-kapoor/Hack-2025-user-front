@@ -6,7 +6,7 @@ export default function StoreRecipeItem({ recipe }: { recipe: Recipe }) {
   return (
     <>
       <Link href={`/user/recipes/${recipe.recipe_id}`}>
-        <div className="self-stretch px-4 py-6 flex flex-col justify-start items-start">
+        <div className="self-stretch py-[16px] flex flex-col justify-start items-start">
           <div className="self-stretch rounded-xl inline-flex items-start gap-x-6">
             <div className="w-[120px] h-[120px] relative rounded-xl overflow-hidden">
               {recipe.image_url && (
