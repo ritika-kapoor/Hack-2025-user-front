@@ -1,4 +1,4 @@
-import { Bookmark } from "lucide-react";
+// import { Bookmark } from "lucide-react";
 import { useCallback, useState } from "react";
 
 interface BookMarkToggleProps {
@@ -39,7 +39,20 @@ export default function BookMarkToggle({ recipe_id, saved_flg }: BookMarkToggleP
     return (
         <div>
             <button onClick={handleBookmarkToggle}>
-                <Bookmark className={`w-10 h-10 ${isBookMarked ? "fill-yellow-500 text-yellow-500" : "stroke-black fill-transparent"}`} />
+                <svg 
+                    width="30" 
+                    height="30" 
+                    viewBox="0 0 15 22" 
+                    fill="none" 
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path 
+                        d="M1 20.5V1H14V20.5L7.5 16.1065L1 20.5Z" 
+                        stroke={isBookMarked ? "#EAB308" : "#000000"} 
+                        fill={isBookMarked ? "#EAB308" : "transparent"}
+                        strokeWidth="1.39286"
+                    />
+                </svg>
             </button>
         </div>
     )
