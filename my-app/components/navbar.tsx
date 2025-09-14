@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, BookOpen, User, Bookmark } from "lucide-react"
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -45,7 +44,7 @@ export default function Navbar() {
             isActive("/user") && !isActive("/user/recipes") ? "text-primary" : "text-muted-foreground"
           }`}
         >
-          <Home className="h-5 w-5" />
+          <span><img src="/images/not-clicked-home.svg" alt="home" className="h-5 w-5" /></span>
           <span className="text-xs mt-1">ホーム</span>
         </Link>
 
@@ -55,7 +54,7 @@ export default function Navbar() {
             isActive("/user/recipes") ? "text-primary" : "text-muted-foreground"
           }`}
         >
-          <BookOpen className="h-5 w-5" />
+          {isActive("/user/recipes") && !isActive("/user/recipes/store-recipes") ? <span><img src="/images/clicked-recipe.svg" alt="clicked-recipe" className="h-5 w-5" /></span>: <span><img src="/images/not-clicked-recipe.svg" alt="recipe" className="h-5 w-5" /></span>}
           <span className="text-xs mt-1">レシピ</span>
         </Link>
 
@@ -65,7 +64,7 @@ export default function Navbar() {
             isActive("/user/recipes/store-recipes") ? "text-primary" : "text-muted-foreground"
           }`}
         >
-          <Bookmark className="h-5 w-5" />
+          {isActive("/user/recipes/store-recipes") ? <span><img src="/images/clicked-store.svg" alt="clicked-store" className="h-5 w-5" /></span> : <span><img src="/images/not-clicked-bookmark.svg" alt="store" className="h-5 w-5" /></span>}
           <span className="text-xs mt-1">保存リスト</span>
         </Link>
 
@@ -75,7 +74,7 @@ export default function Navbar() {
             isActive("/user/profile") ? "text-primary" : "text-muted-foreground"
           }`}
         >
-          <User className="h-5 w-5" />
+          {isActive("/user/profile") ? <span><img src="/images/clicked-mypage.svg" alt="clicked-mypage" className="h-5 w-5" /></span> : <span><img src="/images/not-clicked-profile.svg" alt="profile" className="h-5 w-5" /></span>}
           <span className="text-xs mt-1">マイページ</span>
         </Link>
       </div>
