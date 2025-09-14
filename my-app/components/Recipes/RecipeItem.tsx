@@ -46,7 +46,7 @@ export default function RecipeItem({ recipe }: RecipeItemProps) {
               <div className="self-stretch flex flex-col justify-start items-start ml-[16px]">
                 <div className="self-stretch flex flex-col justify-start items-start">
                   <div className="self-stretch justify-start text-slate-500 text-sm font-normal font-['Noto_Sans_JP'] leading-tight">
-                    調理時間 {recipe.cook_time}分　{recipe.calories}kcal　{recipe.total_price}円
+                    調理時間 {recipe.cook_time}分 {recipe.calories}kcal {recipe.total_price}円
                   </div>
                 </div>
                 <div className="self-stretch flex flex-col justify-start items-start">
