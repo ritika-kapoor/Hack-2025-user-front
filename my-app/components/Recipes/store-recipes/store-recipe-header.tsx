@@ -12,7 +12,8 @@ interface StoreRecipesHeaderProps {
 
 export default function StoreRecipesHeader({ recipe, setFilteredRecipes }: StoreRecipesHeaderProps) {
     const [searchTerm, setSearchTerm] = useState("");
-    const [sortOrder, setSortOrder] = useState("newest");
+    const [sortOrder, setSortOrder] = useState("");
+    // console.log(recipe);
 
     useEffect(() => {
         let filteredRecipes = [...recipe];
@@ -24,12 +25,12 @@ export default function StoreRecipesHeader({ recipe, setFilteredRecipes }: Store
             );
         }
 
-        // 並び替え (store_dateはバックエンドにないので一時的に削除)
-        // if (sortOrder === "newest") {
-        //     filteredRecipes.sort((a, b) => new Date(b.store_date).getTime() - new Date(a.store_date).getTime());
-        // } else if (sortOrder === "oldest") {
-        //     filteredRecipes.sort((a, b) => new Date(a.store_date).getTime() - new Date(b.store_date).getTime());
-        // }
+        // 初期表示時または並び替え時に、created_at でソート
+        if (!sortOrder || sortOrder === "newest") { // デフォルトで新しい順にソート
+            filteredRecipes.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        } else if (sortOrder === "oldest") {
+            filteredRecipes.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+        }
         
         setFilteredRecipes(filteredRecipes);
     }, [searchTerm, sortOrder, recipe, setFilteredRecipes]);
