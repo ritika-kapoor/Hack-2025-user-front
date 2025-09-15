@@ -3,6 +3,7 @@
 // import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -11,9 +12,11 @@ export default function Home() {
         {/* Header Section */}
         <div className="text-center mb-12">
           <div className="mb-6">
-            <img 
+            <Image 
               src="/images/meguru_logo.png" 
               alt="meguru" 
+              width={254}
+              height={70}
               className="h-24 mx-auto"
             />
           </div>

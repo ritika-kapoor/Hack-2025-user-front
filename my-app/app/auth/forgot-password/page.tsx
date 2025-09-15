@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, CheckCircle } from "lucide-react"
+import Image from "next/image";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("")
@@ -60,9 +61,11 @@ export default function ForgotPasswordPage() {
         <div className="max-w-sm mx-auto">
           {/* meguruロゴ */}
           <div className="text-center mb-12 mt-8">
-            <img 
+            <Image 
               src="/images/meguru_logo.png" 
               alt="meguru" 
+              width={100} // 仮の値
+              height={100} // 仮の値
               className="h-12 mx-auto"
             />
           </div>
@@ -109,7 +112,7 @@ export default function ForgotPasswordPage() {
 
         {/* meguruロゴ */}
         <div className="text-center mb-12 mt-8">
-          <img 
+          <Image 
             src="/images/meguru_logo.png" 
             alt="meguru" 
             className="mx-auto"

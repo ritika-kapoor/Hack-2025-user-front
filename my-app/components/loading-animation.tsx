@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useState, useEffect } from "react"
 
 interface LoadingAnimationProps {
@@ -52,7 +53,7 @@ export default function LoadingAnimation({ }: LoadingAnimationProps) {
         {/* Loading image */}
         <div className="w-48 h-52 flex items-center justify-center mb-4">
           {/* gifで動かす */}
-          <img 
+          <Image 
             src="/images/loading-1.gif" 
             alt="Loading" 
             className="w-full h-full object-cover" 

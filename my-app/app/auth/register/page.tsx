@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import Image from "next/image";
 
 export default function RegisterPage() {
   const [step, setStep] = useState(1)
@@ -172,7 +173,7 @@ export default function RegisterPage() {
       <div className="max-w-sm mx-auto">
         {/* meguruロゴ */}
         <div className="text-center mb-12 mt-8">
-          <img 
+          <Image 
             src="/images/meguru_logo.png" 
             alt="meguru" 
             className="mx-auto"

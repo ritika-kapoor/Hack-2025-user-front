@@ -1,7 +1,7 @@
 "use client"
 
 import { useParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -98,7 +98,7 @@ export default function UserFlyerPage() {
   };
 
   // フライヤービューを記録する関数
-  const recordFlyerView = async (flyerId: string) => {
+  const recordFlyerView = useCallback(async (flyerId: string) => {
     if (!user?.id) return;
 
     try {
@@ -117,7 +117,7 @@ export default function UserFlyerPage() {
     } catch (error) {
       console.warn('フライヤービューの記録に失敗しました:', error);
     }
-  };
+  }, [user?.id]);
 
 
 
@@ -150,7 +150,7 @@ export default function UserFlyerPage() {
     };
 
     fetchFlyerData();
-  }, [storeId, user?.id]);
+  }, [storeId, user?.id, recordFlyerView]);
 
   if (loading) {
     return (

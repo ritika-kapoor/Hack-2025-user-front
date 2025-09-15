@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -40,42 +41,42 @@ export default function Navbar() {
       <div className="flex justify-around items-center h-16">
         <Link
           href="/user"
-          className={`flex flex-col items-center justify-center w-full h-full ${
+          className={`flex flex-col items-center justify-center p-2 rounded-lg transition-colors duration-200 ${
             isActive("/user") && !isActive("/user/recipes") ? "text-primary" : "text-muted-foreground"
           }`}
         >
-          <span><img src="/images/not-clicked-home.svg" alt="home" className="h-5 w-5" /></span>
-          <span className="text-xs mt-1">ホーム</span>
+          <Image  src={("/images/not-clicked-home.svg")} alt="Home" width={24} height={24} />
+          <span className={`text-xs font-medium text-gray-500`}>ホーム</span>
         </Link>
 
         <Link
           href="/user/recipes"
-          className={`flex flex-col items-center justify-center w-full h-full ${
+          className={`flex flex-col items-center justify-center p-2 rounded-lg transition-colors duration-200 ${
             isActive("/user/recipes") ? "text-primary" : "text-muted-foreground"
           }`}
         >
-          {isActive("/user/recipes") && !isActive("/user/recipes/store-recipes") ? <span><img src="/images/clicked-recipe.svg" alt="clicked-recipe" className="h-5 w-5" /></span>: <span><img src="/images/not-clicked-recipe.svg" alt="recipe" className="h-5 w-5" /></span>}
-          <span className="text-xs mt-1">レシピ</span>
+          <Image src={isActive("/user/recipes") && !isActive("/user/recipes/store-recipes") ? "/images/clicked-recipe.svg" : "/images/not-clicked-recipe.svg"} alt="Recipe" width={24} height={24} />
+          <span className={`text-xs font-medium text-gray-500 ${isActive("/user/recipes") && !isActive("/user/recipes/store-recipes") ? 'text-gray-500' : 'text-gray-700 font-bold'}`}>レシピ</span>
         </Link>
 
         <Link
           href="/user/recipes/store-recipes"
-          className={`flex flex-col items-center justify-center w-full h-full ${
+          className={`flex flex-col items-center justify-center p-2 rounded-lg transition-colors duration-200 ${
             isActive("/user/recipes/store-recipes") ? "text-primary" : "text-muted-foreground"
           }`}
         >
-          {isActive("/user/recipes/store-recipes") ? <span><img src="/images/clicked-store.svg" alt="clicked-store" className="h-5 w-5" /></span> : <span><img src="/images/not-clicked-bookmark.svg" alt="store" className="h-5 w-5" /></span>}
-          <span className="text-xs mt-1">保存リスト</span>
+          <Image src={isActive("/user/recipes/store-recipes") ? "/images/clicked-store.svg" : "/images/not-clicked-bookmark.svg"} alt="Store" width={24} height={24} />
+          <span className={`text-xs font-medium text-gray-500`}>保存リスト</span>
         </Link>
 
         <Link
           href="/user/profile"
-          className={`flex flex-col items-center justify-center w-full h-full ${
+          className={`flex flex-col items-center justify-center p-2 rounded-lg transition-colors duration-200 ${
             isActive("/user/profile") ? "text-primary" : "text-muted-foreground"
           }`}
         >
-          {isActive("/user/profile") ? <span><img src="/images/clicked-mypage.svg" alt="clicked-mypage" className="h-5 w-5" /></span> : <span><img src="/images/not-clicked-profile.svg" alt="profile" className="h-5 w-5" /></span>}
-          <span className="text-xs mt-1">マイページ</span>
+          <Image src={isActive("/user/profile") ? "/images/clicked-mypage.svg" : "/images/not-clicked-profile.svg"} alt="Profile" width={24} height={24} />
+          <span className={`text-xs font-medium text-gray-500`}>マイページ</span>
         </Link>
       </div>
     </nav>

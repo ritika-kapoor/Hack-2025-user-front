@@ -66,7 +66,7 @@ const handleLogin = async () => {
       <div className="max-w-sm mx-auto">
         {/* meguruロゴ */}
         <div className="text-center mb-12 mt-8">
-          <img 
+          <Image 
             src="/images/meguru_logo.png" 
             alt="meguru" 
             className="mx-auto"
@@ -108,7 +108,7 @@ const handleLogin = async () => {
 
           <div className="text-left">
             <Link href="/auth/forgot-password" className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-3">
-            <Image src="/images/Vector 35.svg" alt="meguru" width={6} height={9} />
+            <Image src="/images/Vector 35.svg" alt="Arrow Left" width={6} height={9} />
               パスワードを忘れた方
             </Link>
           </div>

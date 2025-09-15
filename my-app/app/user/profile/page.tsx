@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
+import Image from "next/image";
 
 const editProfileSchema = z.object({
   name: z.string().min(1, "名前は必須です"),
@@ -550,9 +551,12 @@ export default function ProfilePage() {
                               )}
                             </div>
                             <div className="aspect-[3/4] mb-3 overflow-hidden rounded-lg bg-gray-100">
-                              <img
+                              <Image
                                 src={`data:image/png;base64,${flyer.image_data}`}
                                 alt={`${flyer.flyer_data?.store.name}のチラシ`}
+                                width={500} // 仮の値
+                                height={707} // 仮の値
+                                unoptimized={true} // data URL なので最適化を無効にする
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                               />
                             </div>
