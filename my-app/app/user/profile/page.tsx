@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import Image from "next/image";
+import Loading from "@/components/common/loading"
 
 const editProfileSchema = z.object({
   name: z.string().min(1, "名前は必須です"),
@@ -127,7 +128,10 @@ export default function ProfilePage() {
     
     try {
       setFlyersLoading(true);
-      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080";
+      // 開発用
+      // const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080";
+      // 本番用
+      const baseUrl = "https://3qtmceciqv.ap-northeast-1.awsapprunner.com";
       const response = await fetch(`${baseUrl}/api/v1/flyer/nearby?city=${encodeURIComponent(userCity)}&limit=3`);
       if (response.ok) {
         const result = await response.json();
@@ -192,7 +196,10 @@ export default function ProfilePage() {
         setIsLoading(true)
         const token = localStorage.getItem("token")
         
-        const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080";
+        // 開発用
+        // const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080";
+        // 本番用
+        const baseUrl = "https://3qtmceciqv.ap-northeast-1.awsapprunner.com";
         const response = await axios.get(`${baseUrl}/api/v1/users/profile`, {
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -234,7 +241,10 @@ export default function ProfilePage() {
     try {
       const token = localStorage.getItem("token")
       
-      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080";
+      // 開発用
+      // const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080";
+      // 本番用
+      const baseUrl = "https://3qtmceciqv.ap-northeast-1.awsapprunner.com";
       const response = await axios.put(`${baseUrl}/api/v1/users/profile`, data, {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -260,7 +270,8 @@ export default function ProfilePage() {
       <AuthGuard>
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
-            <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4" style={{ color: '#F1B300' }} />
+            {/* <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4" style={{ color: '#F1B300' }} /> */}
+            <Loading />
             <p className="text-gray-600">プロファイル情報を読み込み中...</p>
           </div>
         </div>

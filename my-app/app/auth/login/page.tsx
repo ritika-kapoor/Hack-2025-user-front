@@ -22,9 +22,10 @@ const handleLogin = async () => {
   try {
     setError("")
     
-    // 今だけローカルで動かすためにコメントアウト
-    // const baseUrl = "https://3qtmceciqv.ap-northeast-1.awsapprunner.com";
-    const baseUrl = "http://localhost:8080";
+    // 開発用
+    // const baseUrl = "http://localhost:8080";
+    // 本番用
+    const baseUrl = "https://3qtmceciqv.ap-northeast-1.awsapprunner.com";
     const response = await fetch(`${baseUrl}/api/v1/users/login`, {
       method: "POST",
       headers: {

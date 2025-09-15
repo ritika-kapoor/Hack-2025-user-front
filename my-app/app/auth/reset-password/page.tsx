@@ -52,7 +52,10 @@ function ResetPasswordForm() {
       setError("")
       setIsLoading(true)
       
-      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080";
+      // 開発用
+      // const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080";
+      // 本番用
+      const baseUrl = "https://3qtmceciqv.ap-northeast-1.awsapprunner.com";
       const response = await fetch(`${baseUrl}/api/v1/users/reset-password`, {
         method: "POST",
         headers: {

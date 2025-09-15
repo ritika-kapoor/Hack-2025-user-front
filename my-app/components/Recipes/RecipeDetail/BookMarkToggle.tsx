@@ -15,8 +15,11 @@ export default function BookMarkToggle({ recipe_id, saved_flg }: BookMarkToggleP
             // ログインしていない時
             return;
         }
-
-        const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
+        // 開発用
+        // const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
+        // const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
+        // 本番用
+        const baseUrl = "https://3qtmceciqv.ap-northeast-1.awsapprunner.com";
         const method = isBookMarked ? "DELETE" : "POST";
         const endpoint = isBookMarked ? `${baseUrl}/api/v1/saved-recipes/${recipe_id}` : `${baseUrl}/api/v1/saved-recipes`;
 
