@@ -77,19 +77,18 @@ export default function UserHomePage() {
   // Home view - matching Figma design exactly
   return (
     <main className="min-h-screen flex flex-col items-center justify-center" style={{ backgroundColor: '#F7F4F4' }}>
-      {/* Background image */}
-      <div className="absolute top-24 w-64 h-16">
-        <Image
-          src="/images/logo-image.png"
-          alt="Background"
-          width={256} // w-64 は 256px
-          height={64} // h-16 は 64px
-          className="w-full h-full object-cover"
-        />
-      </div>
-
-      {/* Main content container */}
-      <div className="flex flex-col items-center gap-14 px-36 py-32 w-full max-w-sm">
+      {/* Main content container - including logo */}
+      <div className="flex flex-col items-center gap-14 px-8 py-8 w-full max-w-sm">
+        {/* Logo image */}
+        <div className="flex justify-center">
+          <Image
+            src="/images/logo-image.png"
+            alt="Background"
+            width={256}
+            height={64}
+            className="object-contain"
+          />
+        </div>
         {/* First section - Camera */}
         <div className="flex flex-col items-center gap-3 w-44">
           <p 
