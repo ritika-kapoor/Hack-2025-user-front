@@ -142,6 +142,7 @@ export default function CameraCapture({ onImageCapture, onBack }: CameraCaptureP
         
         const baseUrl = "https://3qtmceciqv.ap-northeast-1.awsapprunner.com";
         // Extract base64 data from data URL
+        // const baseUrl = "http://localhost:8080";
         const base64Data = capturedImage.split(',')[1] // Remove "data:image/jpeg;base64," prefix
         
         const response = await fetch(`${baseUrl}/api/v1/recipes-from-image`, {
@@ -191,12 +192,11 @@ export default function CameraCapture({ onImageCapture, onBack }: CameraCaptureP
       } catch (error) {
         console.error("❌ AI Analysis Error:", error)
         
-        // Fallback with mock ingredients
-        const fallbackIngredients = ["にんじん", "玉ねぎ", "キャベツ", "豚肉", "じゃがいも"]
-        setAnalysisResult(fallbackIngredients)
-        localStorage.setItem('detectedIngredients', JSON.stringify(fallbackIngredients))
-        localStorage.setItem('extracted_ingredients', JSON.stringify(fallbackIngredients))
-        onImageCapture(capturedImage, fallbackIngredients)
+        // ダミーなし
+        setAnalysisResult([])
+        setIsAnalyzing(false)
+      } finally {
+        setIsAnalyzing(false)
       }
     }
   }
